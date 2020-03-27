@@ -1,4 +1,5 @@
 class TweeetsController < ApplicationController
+  before_action :require_login
   before_action :set_tweeet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   attr_reader :tweeets
@@ -19,7 +20,8 @@ class TweeetsController < ApplicationController
   # GET /tweeets/1
   # GET /tweeets/1.json
   def show
-    
+    @user = User.find(params[:id])
+    redirect_to '/users/sign_in' unless @user == current_user
   end
 
   # GET /tweeets/new
@@ -80,5 +82,12 @@ class TweeetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tweeet_params
       params.require(:tweeet).permit(:tweeet)
+    end
+
+    def require_login
+      unless user_signed_in?
+        flash[:error] = "You must be logged in to access this section"
+        redirect_to '/' # halts request cycle
+      end
     end
 end
