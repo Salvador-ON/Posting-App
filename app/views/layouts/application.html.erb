@@ -37,7 +37,7 @@
           <div class="navbar-item">
 					<div class="field is-grouped">
 						<p class="control">
-							<%= link_to 'New Tweeet', root_path, class: "button is-info is-inverted" %>
+							<%= link_to 'New Think ', root_path, class: "button is-info is-inverted" %>
 						</p>
             <% if user_signed_in? %>
               <p class="control">
@@ -59,10 +59,7 @@
 				</div>
 			</div>
   	</nav>
-    	<% if user_signed_in? %>
-    	<h3 class="title is-4" style="text-align:center"><%= current_user.name %>, What are you thinking: </h3>	
-    	<% end %>
-
+    
     <%= yield %>
   </body>
 </html>
