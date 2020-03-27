@@ -1,17 +1,25 @@
 class TweeetsController < ApplicationController
   before_action :set_tweeet, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  attr_reader :tweeets
 
   # GET /tweeets
   # GET /tweeets.json
   def index
-    @tweeets = Tweeet.all.order("created_at DESC")
+    #@tweeets = Tweeet.all.order("created_at DESC")
+    if user_signed_in? 
+    following_ids = "SELECT followed_id FROM relationships WHERE  follower_id = :user_id"
+    @tweeets = Tweeet.where("user_id IN (#{following_ids})
+    OR user_id = :user_id", user_id: current_user.id).order("created_at DESC")
+    end
     @tweeet = Tweeet.new
+    @ul = User.all
   end
 
   # GET /tweeets/1
   # GET /tweeets/1.json
   def show
+    
   end
 
   # GET /tweeets/new
@@ -30,7 +38,7 @@ class TweeetsController < ApplicationController
 
     respond_to do |format|
       if @tweeet.save
-        format.html { redirect_to @tweeet, notice: 'Tweeet was successfully created.' }
+        format.html { redirect_to :root}
         format.json { render :show, status: :created, location: @tweeet }
       else
         format.html { render :new }
