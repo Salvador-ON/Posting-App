@@ -2,7 +2,8 @@
 
 This is the mock up App called Thinker using twitter from reference to build this app
 
-
+![](app/assets/images/sshot1.png)
+![](app/assets/images/sshot2.png)
 
 # What it does
 
