@@ -15,8 +15,8 @@ This is the mock-up app called Thinker using twitter from reference to build thi
 
 # How to run this project
 
-- Install ruby.
-- Install ruby on rails.
+- Install Ruby.
+- Install Ruby on Rails.
 - Install bundle.
 - Run "bundle install" inside the folder.
 - Run "rails server" inside the folder.
